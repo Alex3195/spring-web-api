@@ -27,6 +27,18 @@ public class MyController {
         return books.get(id);
     }
 
+    @GetMapping(value = {"/get_book_by_name/{name}"})
+    public Book getBookByName(@PathVariable("name") String name) {
+        Book res = new Book();
+        for (Book b : books) {
+            if (b.getName().equalsIgnoreCase(name)) {
+                res = b;
+                break;
+            }
+        }
+        return res;
+    }
+
     @PutMapping(value = {"/edit_book/{id}"})
     public List<Book> editBook(@PathVariable("id") int id, @RequestBody Book book) {
         books.get(id).setName(book.getName());
